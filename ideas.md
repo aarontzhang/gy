@@ -105,3 +105,12 @@ An AI that gives every small business the superpowers Amazon spent $100B buildin
 35. **Physical world arbitrage engine**
 An AI that detects price differences across locations, excess inventory that should be moved, and demand/supply mismatches in the physical economy, then sells the intelligence or executes the trades itself.
 
+36. **AI-native mall operator**
+An AI that runs every function of a shopping mall management company end-to-end — local market analysis, tenant sourcing and outreach, lease negotiation, marketing and events, experience redesign, and day-to-day tenant operations — becoming the default operator of every dead and dying mall in America.
+
+37. **AI physical space research and simulation firm**
+A platform that uses computer vision on existing cameras to measure real foot traffic, dwell time, and flow, then fuses it with census and local demographic data to simulate what the surrounding population actually wants — which tenants, experiences, and redesigns will work — so mall REITs, developers, airports, stadiums, and campuses can test every decision before spending a dollar.
+
+38. **AI business manager for the entire solo economy**
+An AI that handles contracts, invoicing, negotiation, deal flow, taxes, scheduling, and brand partnerships for everyone who earns income as their own business — creators, coaches, consultants, athletes, musicians, speakers, authors, freelancers, tradespeople, solo lawyers, and realtors — becoming the default back office for every 1099 worker on earth.
+
