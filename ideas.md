@@ -78,3 +78,30 @@ A pure-software agent that plugs into every commercial building's existing BMS o
 26. **Startup brain with tiered role-based visibility**
 A company brain that records every meeting and ingests every document, then exposes it through Discord-style tiered roles so each person — founder, exec, IC, contractor — instantly sees exactly the slice of org knowledge they're cleared for and nothing they aren't.
 
+27. **AI-native customer acquisition service**
+An AI that tests hundreds of distribution channels in parallel for B2B companies and doubles down on what works, becoming the default growth engine for every startup and enterprise.
+
+28. **AI-native property manager**
+An AI that swallows the property management company end-to-end — tenant comms, maintenance dispatch, rent collection, cleaning coordination, and Airbnb ops — running every residential and commercial property on earth.
+
+29. **Franchise OS**
+An AI that runs every operational aspect of a physical business location — hiring, scheduling, inventory, marketing, compliance — so anyone can open a laundromat, gym, or med spa and you take a revenue cut from every location forever.
+
+30. **Uber for solo service businesses**
+A platform where anyone can become a one-person service business while an AI handles advertising, deal flow, calendar, negotiation, invoicing, and purchasing — operators just show up and do the work.
+
+31. **AI-native advertising agency**
+An AI that designs creative, buys media, places billboards and digital/print/signage, optimizes spend, and reports results — a full-service ad agency run by two people instead of two hundred.
+
+32. **One video → every format**
+A service that takes a single video recording and automatically turns it into clips, blogs, tweets, newsletters, and ads, becoming the default content multiplication layer for every creator and company.
+
+33. **AI-native building services company**
+An AI that handles inspection, quoting, contractor dispatch, and project management across roofing, HVAC, electrical, plumbing, and painting, swallowing the entire commercial building services industry.
+
+34. **Amazon-in-a-box for small business**
+An AI that gives every small business the superpowers Amazon spent $100B building — dynamic pricing, demand prediction, personalized marketing, supply chain optimization, and customer analytics — delivered as a service.
+
+35. **Physical world arbitrage engine**
+An AI that detects price differences across locations, excess inventory that should be moved, and demand/supply mismatches in the physical economy, then sells the intelligence or executes the trades itself.
+
