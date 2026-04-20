@@ -36,7 +36,7 @@ Forward-looking spaces worth building in. Not ideas — spaces. Each contains ma
 
 ---
 
-## 5. The AI-Native Professional Services Firm
+## 2. The AI-Native Professional Services Firm
 
 **Thesis:** Don't sell tools to existing firms. Build the firm. An AI-native law firm, accounting firm, marketing agency, design studio, research practice, M&A shop — staffed with 3–5 senior humans each running 50+ agents. Deliver the output of a 50-person firm at 1/3 the price with 10x the margin. This is the "swallow the company" thesis scaled to professional services.
 
@@ -79,7 +79,7 @@ Forward-looking spaces worth building in. Not ideas — spaces. Each contains ma
 
 ---
 
-## 8. The Post-App Interface Layer
+## 3. The Post-App Interface Layer
 
 **Thesis:** Apps exist because databases need UIs. When humans interact with a universal agent via natural language, voice, and camera, the app layer collapses for entire categories. Entire classes of app-native businesses disappear or compress massively — tracking, logging, scheduling, note-taking, journaling, simple databases, todo lists, habit trackers, calorie counters, basic CRM.
 
