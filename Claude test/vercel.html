@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Vercel — Instagram Ad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #000;
+    --fg: #fff;
+    --dim: #8f8f8f;
+    --line: rgba(255,255,255,0.08);
+    --accent: #fff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #0a0a0a;
+    font-family: 'Geist', -apple-system, sans-serif;
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+  }
+
+  .ad {
+    width: 1080px;
+    height: 1080px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    transform-origin: center;
+  }
+
+  /* Subtle grid */
+  .ad::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 75%);
+    opacity: 0.7;
+  }
+
+  /* Glow halo behind triangle */
+  .halo {
+    position: absolute;
+    width: 900px; height: 900px;
+    left: 50%; top: 38%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 30%, transparent 60%);
+    filter: blur(20px);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.05); }
+  }
+
+  /* Top status bar */
+  .status {
+    position: absolute;
+    top: 56px; left: 56px; right: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'Geist Mono', monospace;
+    font-size: 16px;
+    color: var(--dim);
+    letter-spacing: 0.02em;
+    z-index: 3;
+  }
+  .status .dot {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; background: #50e3c2;
+    margin-right: 10px;
+    box-shadow: 0 0 12px #50e3c2;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.5; } }
+  .status .right { display: flex; gap: 32px; }
+
+  /* Logo cluster */
+  .brand {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -58%);
+    z-index: 4;
+    text-align: center;
+  }
+  .brand svg {
+    width: 280px; height: auto;
+    display: block;
+    margin: 0 auto 36px;
+    filter: drop-shadow(0 0 60px rgba(255,255,255,0.25));
+  }
+  .brand .word {
+    font-weight: 700;
+    font-size: 84px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  /* Tagline */
+  .tag {
+    position: absolute;
+    left: 56px; right: 56px;
+    bottom: 220px;
+    text-align: center;
+    z-index: 4;
+  }
+  .tag h1 {
+    font-size: 92px;
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 0.96;
+  }
+  .tag h1 em {
+    font-style: normal;
+    background: linear-gradient(180deg, #fff 0%, #888 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .tag p {
+    margin-top: 28px;
+    font-size: 22px;
+    color: var(--dim);
+    letter-spacing: -0.005em;
+    max-width: 640px;
+    margin-left: auto; margin-right: auto;
+    line-height: 1.45;
+  }
+
+  /* Bottom command card */
+  .cmd {
+    position: absolute;
+    bottom: 56px; left: 56px; right: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 28px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    backdrop-filter: blur(8px);
+    z-index: 4;
+  }
+  .cmd .prompt {
+    font-family: 'Geist Mono', monospace;
+    font-size: 20px;
+    color: var(--fg);
+    letter-spacing: -0.01em;
+  }
+  .cmd .prompt .dim { color: var(--dim); }
+  .cmd .prompt .cur {
+    display: inline-block;
+    width: 10px; height: 22px;
+    background: #fff;
+    margin-left: 4px;
+    vertical-align: -3px;
+    animation: cur 1s steps(2) infinite;
+  }
+  @keyframes cur { 50% { opacity: 0; } }
+  .cmd .pill {
+    font-family: 'Geist Mono', monospace;
+    font-size: 13px;
+    color: #50e3c2;
+    border: 1px solid rgba(80,227,194,0.3);
+    background: rgba(80,227,194,0.08);
+    padding: 6px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Corner ticks */
+  .tick { position: absolute; width: 18px; height: 18px; border: 1px solid rgba(255,255,255,0.4); z-index: 2;}
+  .tick.tl { top: 28px; left: 28px; border-right: 0; border-bottom: 0; }
+  .tick.tr { top: 28px; right: 28px; border-left: 0; border-bottom: 0; }
+  .tick.bl { bottom: 28px; left: 28px; border-right: 0; border-top: 0; }
+  .tick.br { bottom: 28px; right: 28px; border-left: 0; border-top: 0; }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="tick tl"></div>
+  <div class="tick tr"></div>
+  <div class="tick bl"></div>
+  <div class="tick br"></div>
+
+  <div class="halo"></div>
+
+  <div class="status">
+    <div><span class="dot"></span>BUILD · READY</div>
+    <div class="right">
+      <span>iad1 · global</span>
+      <span>v40.2.1</span>
+    </div>
+  </div>
+
+  <div class="brand">
+    <svg viewBox="0 0 76 65" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+      <path d="M37.5274 0L75.0548 65H0L37.5274 0Z"/>
+    </svg>
+    <div class="word">Vercel</div>
+  </div>
+
+  <div class="tag">
+    <h1>Ship at the<br/><em>speed of thought.</em></h1>
+    <p>The frontend cloud built for AI-native teams. Push to git. We handle the rest — preview, scale, edge.</p>
+  </div>
+
+  <div class="cmd">
+    <div class="prompt"><span class="dim">$</span> npx vercel --prod<span class="cur"></span></div>
+    <div class="pill">deployed in 4.3s</div>
+  </div>
+</div>
+</body>
+</html>

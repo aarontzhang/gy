@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Instagram Ads — Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #111;
+    --fg: #fafafa;
+    --dim: #888;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Geist', -apple-system, sans-serif;
+    padding: 60px 40px;
+    min-height: 100vh;
+  }
+  h1 {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin-bottom: 8px;
+  }
+  .sub {
+    color: var(--dim);
+    margin-bottom: 48px;
+    font-size: 16px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 32px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  .tile {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .tile:hover { transform: translateY(-4px); border-color: #444; }
+  .frame {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .frame iframe {
+    width: 1080px;
+    height: 1080px;
+    border: 0;
+    transform-origin: top left;
+    transform: scale(var(--s, 0.4));
+    pointer-events: none;
+  }
+  .meta {
+    padding: 18px 22px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .meta .name { font-weight: 600; font-size: 18px; letter-spacing: -0.02em; }
+  .meta .open {
+    font-size: 13px; color: var(--dim);
+    text-decoration: none;
+    border: 1px solid #333;
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: all 0.2s;
+  }
+  .meta .open:hover { color: var(--fg); border-color: #555; }
+</style>
+</head>
+<body>
+<h1>Instagram Ads</h1>
+<p class="sub">Square 1080×1080 ads, each rendered to its company's brand. Click any tile to open full-size.</p>
+<div class="grid" id="grid"></div>
+
+<script>
+  const ads = [
+    { name: "Vercel", file: "vercel.html" },
+    { name: "Linear", file: "linear.html" },
+    { name: "Stripe", file: "stripe.html" },
+    { name: "PostHog", file: "posthog.html" },
+    { name: "Granola", file: "granola.html" },
+  ];
+
+  const grid = document.getElementById("grid");
+  ads.forEach(ad => {
+    const tile = document.createElement("div");
+    tile.className = "tile";
+    tile.innerHTML = `
+      <div class="frame">
+        <iframe src="${ad.file}" scrolling="no"></iframe>
+      </div>
+      <div class="meta">
+        <div class="name">${ad.name}</div>
+        <a class="open" href="${ad.file}" target="_blank">Open ↗</a>
+      </div>
+    `;
+    grid.appendChild(tile);
+  });
+
+  // scale iframe to fit container
+  function scale() {
+    document.querySelectorAll(".frame").forEach(f => {
+      const w = f.clientWidth;
+      f.querySelector("iframe").style.setProperty("--s", w / 1080);
+    });
+  }
+  window.addEventListener("load", scale);
+  window.addEventListener("resize", scale);
+</script>
+</body>
+</html>

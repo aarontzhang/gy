@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PostHog — Instagram Ad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --hog-yellow: #f9bd2b;
+    --hog-yellow-2: #ffd45e;
+    --hog-blue: #1d4aff;
+    --hog-red: #f54e00;
+    --hog-cream: #eeefe9;
+    --hog-ink: #151515;
+    --hog-paper: #f7f3e8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #2a2419;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--hog-ink);
+    display: grid; place-items: center;
+    min-height: 100vh;
+  }
+  .ad {
+    width: 1080px; height: 1080px;
+    background: var(--hog-paper);
+    position: relative; overflow: hidden;
+  }
+  /* Paper texture */
+  .ad::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 38px, rgba(29,74,255,0.05) 38px 39px);
+    pointer-events: none;
+    z-index: 1;
+  }
+  /* Sticker dots in corners */
+  .dot {
+    position: absolute;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--hog-red);
+    z-index: 2;
+  }
+  .dot.tl { top: 36px; left: 36px; }
+  .dot.tr { top: 36px; right: 36px; }
+  .dot.bl { bottom: 36px; left: 36px; }
+  .dot.br { bottom: 36px; right: 36px; }
+
+  /* Top bar */
+  .top {
+    position: absolute; top: 60px; left: 80px; right: 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 4;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--hog-ink);
+  }
+  .top .stamp {
+    border: 2px solid var(--hog-ink);
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-weight: 600;
+    transform: rotate(-2deg);
+    background: var(--hog-yellow);
+  }
+
+  /* Headline & hog */
+  .hero {
+    position: absolute;
+    top: 130px; left: 80px; right: 80px;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 30px;
+    align-items: start;
+  }
+  .hero h1 {
+    font-size: 110px;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
+  }
+  .hero h1 .u {
+    background: linear-gradient(180deg, transparent 65%, var(--hog-yellow) 65%);
+  }
+  .hero h1 .blue { color: var(--hog-blue); font-style: italic; }
+
+  .hog {
+    position: relative;
+    margin-top: 20px;
+    transform: rotate(4deg);
+  }
+  .hog svg { width: 100%; height: auto; display: block; filter: drop-shadow(6px 6px 0 var(--hog-ink)); }
+
+  /* Speech bubble */
+  .speech {
+    position: absolute;
+    top: -36px; left: -90px;
+    background: #fff;
+    border: 3px solid var(--hog-ink);
+    border-radius: 18px;
+    padding: 12px 18px;
+    font-family: 'Comic Neue', cursive;
+    font-weight: 700;
+    font-size: 18px;
+    transform: rotate(-6deg);
+    box-shadow: 4px 4px 0 var(--hog-ink);
+  }
+  .speech::after {
+    content: "";
+    position: absolute;
+    bottom: -20px; right: 30px;
+    width: 0; height: 0;
+    border: 10px solid transparent;
+    border-top: 18px solid #fff;
+    transform: rotate(8deg);
+    filter: drop-shadow(2px 2px 0 var(--hog-ink));
+  }
+
+  /* Feature card */
+  .features {
+    position: absolute;
+    left: 80px; right: 80px;
+    bottom: 220px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    z-index: 4;
+  }
+  .feat {
+    background: #fff;
+    border: 2.5px solid var(--hog-ink);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 5px 5px 0 var(--hog-ink);
+    position: relative;
+  }
+  .feat .ic {
+    width: 36px; height: 36px;
+    background: var(--hog-yellow);
+    border: 2px solid var(--hog-ink);
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .feat:nth-child(2) .ic { background: #b9c4ff; }
+  .feat:nth-child(3) .ic { background: #ffb3a8; }
+  .feat:nth-child(4) .ic { background: #b8e6cd; }
+  .feat h3 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .feat p {
+    font-size: 12px; color: #333;
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.4;
+  }
+
+  /* CTA bottom strip */
+  .cta {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 140px;
+    background: var(--hog-ink);
+    color: var(--hog-paper);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 80px;
+    z-index: 4;
+  }
+  .cta .url {
+    font-size: 30px; font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .cta .url .y { color: var(--hog-yellow); }
+  .cta .btn {
+    background: var(--hog-yellow);
+    color: var(--hog-ink);
+    padding: 16px 28px;
+    border: 3px solid var(--hog-paper);
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    box-shadow: 5px 5px 0 var(--hog-paper);
+  }
+  .cta .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="dot tl"></div><div class="dot tr"></div>
+  <div class="dot bl"></div><div class="dot br"></div>
+
+  <div class="top">
+    <div class="stamp">↳ PostHog · build better products</div>
+    <div>Issue №42 · Apr 2026</div>
+  </div>
+
+  <div class="hero">
+    <h1>How <span class="u">engineers</span><br/>build <span class="blue">successful</span><br/>products.</h1>
+
+    <div class="hog">
+      <div class="speech">I'm Hedgy! I crunch your data 🦔</div>
+      <!-- Stylized hedgehog -->
+      <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <!-- spikes -->
+        <g fill="#3a2a1a" stroke="#151515" stroke-width="3">
+          <polygon points="60,140 80,80 100,140"/>
+          <polygon points="90,120 110,55 130,120"/>
+          <polygon points="120,105 140,35 160,105"/>
+          <polygon points="150,95 170,30 190,95"/>
+          <polygon points="180,100 200,40 220,100"/>
+          <polygon points="210,115 230,55 250,115"/>
+          <polygon points="240,135 260,80 275,140"/>
+        </g>
+        <!-- body -->
+        <ellipse cx="170" cy="200" rx="130" ry="90" fill="#f9bd2b" stroke="#151515" stroke-width="4"/>
+        <!-- face highlight -->
+        <ellipse cx="100" cy="180" rx="55" ry="45" fill="#ffd45e" stroke="#151515" stroke-width="3"/>
+        <!-- eye -->
+        <circle cx="92" cy="170" r="9" fill="#151515"/>
+        <circle cx="89" cy="167" r="3" fill="#fff"/>
+        <!-- nose -->
+        <ellipse cx="55" cy="190" rx="11" ry="9" fill="#151515"/>
+        <!-- mouth -->
+        <path d="M70 205 Q 80 215 95 208" stroke="#151515" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- cheek -->
+        <circle cx="115" cy="200" r="8" fill="#f54e00" opacity="0.6"/>
+        <!-- foot -->
+        <ellipse cx="130" cy="290" rx="22" ry="10" fill="#151515"/>
+        <ellipse cx="220" cy="290" rx="22" ry="10" fill="#151515"/>
+        <!-- laptop -->
+        <rect x="160" y="200" width="110" height="68" rx="6" fill="#1d4aff" stroke="#151515" stroke-width="3"/>
+        <rect x="170" y="208" width="90" height="50" rx="3" fill="#fff"/>
+        <rect x="175" y="215" width="40" height="6" fill="#f9bd2b"/>
+        <rect x="175" y="225" width="60" height="6" fill="#1d4aff"/>
+        <rect x="175" y="235" width="30" height="6" fill="#f54e00"/>
+        <rect x="175" y="245" width="50" height="6" fill="#151515"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feat">
+      <div class="ic">📊</div>
+      <h3>Product analytics</h3>
+      <p>Funnels, retention, paths — all in one place.</p>
+    </div>
+    <div class="feat">
+      <div class="ic">🎬</div>
+      <h3>Session replay</h3>
+      <p>Watch real users use your product.</p>
+    </div>
+    <div class="feat">
+      <div class="ic">🚩</div>
+      <h3>Feature flags</h3>
+      <p>Roll out safely, target precisely.</p>
+    </div>
+    <div class="feat">
+      <div class="ic">🧪</div>
+      <h3>A/B testing</h3>
+      <p>Stop guessing. Start measuring.</p>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="url"><span class="y">→</span> posthog.com</div>
+    <div class="tagline">Open source · Self-host or cloud</div>
+    <div class="btn">Get started free</div>
+  </div>
+</div>
+</body>
+</html>
